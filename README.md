@@ -1,3 +1,12 @@
+---
+title: Embedding Inference Server
+emoji: 🤖
+colorFrom: blue
+colorTo: red
+sdk: docker
+app_port: 8000
+---
+
 # Embedding Inference Server
 
 A high-performance FastAPI server for generating sentence embeddings using `sentence-transformers/all-mpnet-base-v2`. Designed for the NNI Truth Graph pipeline, optimized for speed, security, and deployment on Hugging Face Spaces.
