@@ -90,9 +90,9 @@ async def embed_texts(request: EmbedRequest, _: Any = Depends(verify_api_key)):
     """
     try:
         logger.info(f"Processing batch of {len(request.texts)} texts")
-        # Run encoding in thread pool to avoid blocking
+        # Use a lambda to pass keyword arguments to model.encode in the thread pool
         embeddings = await asyncio.get_event_loop().run_in_executor(
-            None, model.encode, request.texts, False, False
+            None, lambda: model.encode(request.texts, convert_to_tensor=False, show_progress_bar=False)
         )
         logger.info(f"Successfully generated {len(embeddings)} embeddings")
         return EmbedResponse(embeddings=embeddings.tolist())
