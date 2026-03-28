@@ -15,6 +15,15 @@ jobs:
         with:
           fetch-depth: 0
       
+      - name: Create HF Space if not exists
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          curl -s -o /dev/null -X POST https://huggingface.co/api/repos/create \
+            -H "Authorization: Bearer $HF_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d '{"type":"space","name":"InferenceServer","organization":"KnowledgeBenji","sdk":"docker","private":false}' || true
+
       - name: Push to Hugging Face Space
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
