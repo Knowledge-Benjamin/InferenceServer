@@ -56,7 +56,7 @@ jobs:
             --concurrency 80 \
             --max-instances 3 \
             --port 7860 \
-            --set-env-vars INFERENCE_API_KEY=${{ secrets.INFERENCE_API_KEY }} \
+            --set-env-vars "INFERENCE_API_KEY=${{ secrets.INFERENCE_API_KEY }}" \
             --quiet
 
       - name: Show deployed URL
