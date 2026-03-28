@@ -11,8 +11,11 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Pre-bake the embedding model into the image (prevents download on every container boot)
-RUN python3 -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('sentence-transformers/all-mpnet-base-v2')"
+
+# Use Hugging Face cache volume for persistent model storage across restarts
+ENV TRANSFORMERS_CACHE=/data/hf_cache
+ENV HF_HOME=/data/hf_cache
+VOLUME /data/hf_cache
 
 # Copy the rest of the application code
 COPY . .

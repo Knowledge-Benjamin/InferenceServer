@@ -19,5 +19,5 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          git remote add hf https://KnowledgeBenji:${HF_TOKEN}@huggingface.co/spaces/KnowledgeBenji/InferenceSever
+          git remote add hf https://KnowledgeBenji:${HF_TOKEN}@huggingface.co/spaces/KnowledgeBenji/InferenceServer
           git push hf main --force
