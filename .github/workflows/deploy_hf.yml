@@ -16,6 +16,12 @@ jobs:
           fetch-depth: 0
       
 
+      - name: Create HF Space if not exists
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          pip install huggingface_hub
+          python -c "from huggingface_hub import HfApi; import os; HfApi(token=os.environ['HF_TOKEN']).create_repo(repo_id='KnowledgeBenji/InferenceServer', repo_type='space', space_sdk='docker', exist_ok=True)"
 
       - name: Push to Hugging Face Space
         env:
